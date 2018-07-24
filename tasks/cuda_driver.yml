@@ -22,7 +22,7 @@
     remote_src: True
 
 - name: Build new initramfs
-  command: "dracut /boot/initramfs-{{ ansible_kernel }}.img {{ ansible_kernel }}"
+  command: "dracut --force /boot/initramfs-{{ ansible_kernel }}.img {{ ansible_kernel }}"
 
 - name: Reboot to apply new kernel
   shell: "sleep 5 && reboot"
