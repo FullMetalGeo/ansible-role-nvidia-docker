@@ -1,0 +1,48 @@
+---
+# tasks file for nvidia-docker
+- name: Ensure all updates are applied
+  package:
+    name: "*"
+    state: latest
+  register: update_result
+
+- name: Reboot immediately if updates were installed.
+  shell: "sleep 5 && reboot"
+  async: 1
+  poll: 0
+  when: update_result is changed
+
+- name: Wait for the reboot to complete if there were updates.
+  wait_for_connection:
+    connect_timeout: 20
+    sleep: 5
+    delay: 5
+    timeout: 300
+  when: update_result is changed
+
+- name: Ensure Nvidia-Docker v1.x volumes are removed
+  docker-volume:
+    driver: nvidia-docker
+    name: "*"
+    state: absent
+
+- name: Ensure Nvidia-Docker v1.x is Removed
+  package:
+    name: nvidia-docker
+    state: absent
+
+- name: Download Nvidia Driver (CentOS/RHEL)
+  get_url:
+    dest: /etc/yum.repos.d/nvidia-docker.repo
+    url: "https://nvidia.github.io/nvidia-docker/{{ ansible_distribution | lower }}{{ ansible_distribution_version }}/nvidia-docker.repo"
+
+- name: Install Nvidia-Docker
+  package:
+    name: nvidia-docker2
+    state: latest
+
+- name: Kill existing docker process
+  shell: "pkill -SIGHUP dockerd"
+
+- name: Test gpu container
+  command: "docker run --runtime=nvidia --rm nvidia/cuda nvidia-smi"
