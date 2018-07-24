@@ -39,7 +39,7 @@
 - name: Download Nvidia Driver
   get_url:
     dest: /tmp
-    url: "http://us.download.nvidia.com/tesla/390.77/NVIDIA-Linux-x86_64-390.77.run"
+    url: "http://us.download.nvidia.com/XFree86/Linux-x86_64/390.77/NVIDIA-Linux-x86_64-390.77.run"
 
 - name: Install Nvidia Driver
   command: "/bin/bash /tmp/NVIDIA-Linux-x86_64-390.77.run -q -a -n -X -s"
