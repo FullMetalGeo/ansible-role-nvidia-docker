@@ -1,24 +1,6 @@
 ---
 # tasks file for nvidia-docker
-- name: Ensure all updates are applied
-  package:
-    name: "*"
-    state: latest
-  register: update_result
-
-- name: Reboot immediately if updates were installed.
-  shell: "sleep 5 && reboot"
-  async: 1
-  poll: 0
-  when: update_result is changed
-
-- name: Wait for the reboot to complete if there were updates.
-  wait_for_connection:
-    connect_timeout: 20
-    sleep: 5
-    delay: 5
-    timeout: 300
-  when: update_result is changed
+- include_tasks: cuda_driver.yml
 
 - name: Ensure Nvidia-Docker v1.x volumes are removed
   docker_volume:
