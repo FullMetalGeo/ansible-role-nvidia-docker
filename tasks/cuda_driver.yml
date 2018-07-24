@@ -1,0 +1,22 @@
+- name: Modify Grub
+  lineinfile:
+    path: "/etc/default/grub"
+    regexp: "GRUB_CMDLINE_LINUX=\"\""
+    line: "GRUB_CMDLINE_LINUX=rd.driver.blacklist=nouveau nouveau.modeset=0"
+
+- name: Generate new grub configuration
+  command: "grub2-mkconfig -o /boot/grub2/grub.cfg"
+
+- name: Blacklist nouveau in modprobe file
+  lineinfile:
+    path: "/etc/modprobe.d/blacklist.conf"
+    line: "blacklist nouveau"
+
+- name: Move old initramfs
+  copy:
+    src: "/boot/initramfs-{{ ansible_kernel }}.img"
+    dest: "/boot/initramfs-{{ ansible_kernel }}-nouveau.img"
+    remote_src: True
+
+- name: Build new initramfs
+  command: "dracut /boot/initramfs-{{ ansible_kernel }}.img {{ ansible_kernel }}"
