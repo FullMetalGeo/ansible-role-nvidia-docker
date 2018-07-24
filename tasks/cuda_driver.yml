@@ -12,6 +12,8 @@
   lineinfile:
     path: "/etc/modprobe.d/blacklist.conf"
     line: "blacklist nouveau"
+    state: present
+    create: yes
 
 - name: Move old initramfs
   copy:
