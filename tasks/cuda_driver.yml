@@ -23,3 +23,15 @@
 
 - name: Build new initramfs
   command: "dracut /boot/initramfs-{{ ansible_kernel }}.img {{ ansible_kernel }}"
+
+- name: Reboot to apply new kernel
+  shell: "sleep 5 && reboot"
+  async: 1
+  poll: 0
+
+- name: Wait for the reboot to complete
+  wait_for_connection:
+    connect_timeout: 20
+    sleep: 5
+    delay: 5
+    timeout: 300
