@@ -21,7 +21,7 @@
   when: update_result is changed
 
 - name: Ensure Nvidia-Docker v1.x volumes are removed
-  docker-volume:
+  docker_volume:
     driver: nvidia-docker
     name: "*"
     state: absent
