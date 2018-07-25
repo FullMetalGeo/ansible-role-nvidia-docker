@@ -26,11 +26,11 @@
 - name: Configure default runtime
   lineinfile:
     insertbefore: '\"runtimes\":\s\{'
-    line: '    default-runtime": "nvidia",'
+    line: '    "default-runtime": "nvidia",'
     path: /etc/docker/daemon.json
 
 - name: Kill existing docker process
   shell: "pkill -SIGHUP dockerd"
 
 - name: Test gpu container
-  command: "docker run --runtime=nvidia --rm nvidia/cuda nvidia-smi"
+  command: "docker run --rm nvidia/cuda nvidia-smi"
