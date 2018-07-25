@@ -23,6 +23,12 @@
     name: nvidia-docker2
     state: latest
 
+- name: Configure default runtime
+  lineinfile:
+    insertbefore: '\"runtimes\":\s\{'
+    line: '    default-runtime": "nvidia",'
+    path: /etc/docker/daemon.json
+
 - name: Kill existing docker process
   shell: "pkill -SIGHUP dockerd"
 
