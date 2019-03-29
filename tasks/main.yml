@@ -25,5 +25,8 @@
 - name: Kill existing docker process
   shell: "pkill -SIGHUP dockerd"
 
+- name: Reboot system
+  reboot:
+
 - name: Test gpu container
   command: "docker run --rm nvidia/cuda nvidia-smi"

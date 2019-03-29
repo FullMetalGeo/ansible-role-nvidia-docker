@@ -1,3 +1,6 @@
+- apt_repository:
+    repo: ppa:graphics-drivers/ppa
+
 - name: add nvidia-docker apt-key
   apt_key:
     url: https://nvidia.github.io/nvidia-docker/gpgkey
@@ -13,5 +16,6 @@
     update_cache: yes
     name: "{{ item }}"
   with_items:
-    - nvidia-384
+    - ubuntu-drivers-common
+    - nvidia-driver-418
     - "{{ nvidia_docker_package_name }}"
