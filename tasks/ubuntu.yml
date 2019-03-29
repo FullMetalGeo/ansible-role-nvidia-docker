@@ -4,9 +4,35 @@
     state: present
 
 - name: add nvidia-docker apt repository
-  apt_repository:
-    repo: "deb http://nginx.org/packages/mainline/{{ ansible_lsb.id|lower }}/ {{ ansible_lsb.codename|lower }} nginx"
+  get_url:
+    url: "https://nvidia.github.io/nvidia-docker/{{ ansible_lsb.id|lower }}/nvidia-docker.list"
     state: present
-    filename: nvidia-docker
-    update_cache: yes
+    filename: /etc/apt/sources.list.d/nvidia-docker.list
 
+- name: Update apt
+  apt:
+    update_cache: yes
+- name: Update apt
+  apt:
+    update_cache: yes
+- name: Update apt
+  apt:
+    update_cache: yes
+- name: Update apt
+  apt:
+    update_cache: yes
+- name: Update apt
+  apt:
+    update_cache: yes
+- name: Update apt
+  apt:
+    update_cache: yes
+- name: Update apt
+  apt:
+    update_cache: yes
+- name: Update apt
+  apt:
+    update_cache: yes
+- name: Update apt
+  apt:
+    update_cache: yes
