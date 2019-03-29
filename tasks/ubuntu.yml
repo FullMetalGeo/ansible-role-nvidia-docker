@@ -6,33 +6,8 @@
 - name: add nvidia-docker apt repository
   get_url:
     url: "https://nvidia.github.io/nvidia-docker/{{ ansible_lsb.id|lower }}/nvidia-docker.list"
-    state: present
-    filename: /etc/apt/sources.list.d/nvidia-docker.list
+    dest: /etc/apt/sources.list.d/nvidia-docker.list
 
-- name: Update apt
-  apt:
-    update_cache: yes
-- name: Update apt
-  apt:
-    update_cache: yes
-- name: Update apt
-  apt:
-    update_cache: yes
-- name: Update apt
-  apt:
-    update_cache: yes
-- name: Update apt
-  apt:
-    update_cache: yes
-- name: Update apt
-  apt:
-    update_cache: yes
-- name: Update apt
-  apt:
-    update_cache: yes
-- name: Update apt
-  apt:
-    update_cache: yes
 - name: Update apt
   apt:
     update_cache: yes
