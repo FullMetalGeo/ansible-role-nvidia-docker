@@ -1,0 +1,12 @@
+- name: add nvidia-docker apt-key
+  apt_key:
+    url: https://nvidia.github.io/nvidia-docker/gpgkey
+    state: present
+
+- name: add nvidia-docker apt repository
+  apt_repository:
+    repo: "deb http://nginx.org/packages/mainline/{{ ansible_lsb.id|lower }}/ {{ ansible_lsb.codename|lower }} nginx"
+    state: present
+    filename: nvidia-docker
+    update_cache: yes
+
