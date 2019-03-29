@@ -18,7 +18,7 @@
 
 - name: Install Nvidia-Docker
   package:
-    name: nvidia-docker2
+    name: "{{ nvidia_docker_package_name }}"
     state: latest
 
 - name: Configure default runtime

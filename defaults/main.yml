@@ -1,3 +1,4 @@
 ---
 # defaults file for nvidia-docker
 driver_version: "390.77"
+nvdia_docker_package_name: nvidia-docker2
