@@ -11,4 +11,7 @@
 - name: Update apt
   apt:
     update_cache: yes
-    name: "{{ nvidia_docker_package_name }}"
+    name: "{{ item }}"
+  with_items:
+    - nvidia-384
+    - "{{ nvidia_docker_package_name }}"
