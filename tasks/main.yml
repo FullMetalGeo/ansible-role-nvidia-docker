@@ -16,11 +16,6 @@
 - include_tasks: ubuntu.yml
   when: ansible_os_family == 'Debian'
 
-- name: Install Nvidia-Docker
-  package:
-    name: "{{ nvidia_docker_package_name }}"
-    state: latest
-
 - name: Configure default runtime
   lineinfile:
     insertbefore: '\"runtimes\":\s\{'
